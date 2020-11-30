@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Squad Button Colors-->
+    <color name="fireFromSquad">#FF0000</color>
+
+    <!-- Text Colors-->
+    <color name="text_color_black">#000000</color>
+
+
+    <!-- Divider Color-->
+    <color name="divider">#D3D3D3</color>
+
+
+</resources>

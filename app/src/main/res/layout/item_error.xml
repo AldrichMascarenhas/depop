@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_unable_to_connect"
+        android:layout_width="@dimen/view_xlarge"
+        android:layout_height="@dimen/view_xlarge"
+        android:layout_marginTop="@dimen/spacing_all_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.40"
+        app:lottie_fileName="lottie_animations/lottie_no_connection.json"
+        app:lottie_loop="false" />
+
+    <TextView
+        android:id="@+id/connection_error_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_all_small"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lottie_unable_to_connect"
+        tools:text="@tools:sample/lorem[3]" />
+
+    <Button
+        android:id="@+id/button_retry_connect_error"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_all_small"
+        android:layout_marginTop="@dimen/spacing_all_small"
+        android:layout_marginEnd="@dimen/spacing_all_small"
+        android:text="@string/try_again"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connection_error_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Margin and Padding-->
+    <dimen name="spacing_all_none">0dp</dimen>
+    <dimen name="spacing_all_xxsmall">2dp</dimen>
+    <dimen name="spacing_all_xsmall">4dp</dimen>
+    <dimen name="spacing_all_small">8dp</dimen>
+    <dimen name="spacing_all_medium">16dp</dimen>
+    <dimen name="spacing_all_large">32dp</dimen>
+    <dimen name="spacing_all_extra_large">40dp</dimen>
+
+    <dimen name="view_medium">48dp</dimen>
+    <dimen name="view_large">64dp</dimen>
+    <dimen name="view_xlarge">100dp</dimen>
+    <dimen name="view_xxlarge">200dp</dimen>
+
+</resources>

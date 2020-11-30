@@ -33,50 +33,11 @@ class HeroListContentRenderer {
     ): HeroItem {
         return HeroItem(
             heroId = heroDomainModel.id,
-            name = heroDomainModel.name,
-            url = "${heroDomainModel.heroThumbnailPath}/standard_amazing.${heroDomainModel.heroThumbnailExtension}",
+            name = heroDomainModel.description,
+            url = heroDomainModel.image,
             actionCallback = {
                 actionCallback(it)
             }
-        )
-    }
-
-    fun renderSquadHeaderItem(
-        list: List<HeroDomainModel>,
-        context: Context,
-        actionCallback: ((Int) -> Unit)
-    ): Item<GroupieViewHolder> {
-
-        val newlist = list.map {
-            buildHeroProfileItem(it) {
-                actionCallback(it)
-            }
-        }
-        return buildHorizontalRecyclerItem(newlist, context)
-    }
-
-    private fun buildHeroProfileItem(
-        heroDomainModel: HeroDomainModel,
-        actionCallback: ((Int) -> Unit)
-    ): HeroProfileItem {
-        return HeroProfileItem(
-            heroId = heroDomainModel.id,
-            url = "${heroDomainModel.heroThumbnailPath}/standard_amazing.${heroDomainModel.heroThumbnailExtension}",
-            title = heroDomainModel.name,
-            actionCallback = {
-                actionCallback(it)
-            }
-        )
-    }
-
-    private fun buildHorizontalRecyclerItem(
-        list: List<Group>,
-        context: Context
-    ): HorizontalRecyclerItem {
-        return HorizontalRecyclerItem(
-            title = context.resources.getString(R.string.squad_header_title),
-            adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(list) }
-
         )
     }
 }

@@ -22,29 +22,9 @@ val domainModule = DI.Module(name = "domainModule") {
         )
     }
 
-    bind() from singleton {
-        AddHeroToSquadUseCase(
-            instance()
-        )
-    }
-
-    bind() from singleton {
-        GetSquadHeroesUseCase(
-            instance()
-        )
-    }
-
-    bind() from singleton {
-        RemoveHeroFromSquadUseCase(
-            instance()
-        )
-    }
 
     bind<MarvelGateway>() with singleton {
         MarvelGatewayImpl(
-            instance(),
-            instance(),
-            instance(),
             instance(),
             instance()
         )

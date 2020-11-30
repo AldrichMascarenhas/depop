@@ -1,6 +1,7 @@
 package com.nerdcutlet.marvel.data.remote.retrofit.service
 
-import com.nerdcutlet.marvel.data.remote.retrofit.response.CharactersResponse
+import com.nerdcutlet.marvel.data.remote.retrofit.response.DepopItemResponse
+import com.nerdcutlet.marvel.data.remote.retrofit.response.DepopResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -8,15 +9,15 @@ import retrofit2.http.Query
 
 interface MarvelService {
 
-    @GET("/v1/public/characters")
-    suspend fun getCharacters(
-        @Query("offset") offset: Int,
-        @Query("orderBy") orderBy: String
+    @GET("products/popular/")
+    suspend fun getCharacters(): Response<DepopResponse>
 
-    ): Response<CharactersResponse>
 
-    @GET("/v1/public/characters/{characterId}")
+    @GET("products/{characterId}/")
     suspend fun getCharacterById(
-        @Path("characterId") characterId: Int
-    ): Response<CharactersResponse>
+        @Path("characterId") characterId: String
+    ): Response<DepopItemResponse>
+
+
+
 }

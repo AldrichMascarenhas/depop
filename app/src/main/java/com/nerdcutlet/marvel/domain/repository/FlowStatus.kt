@@ -26,17 +26,10 @@ abstract class FlowStatus<RequestType : Any, ResultType : Any> {
             emit(Status.Error(Exception()))
         }
 
-        databaseCall()?.let {
-            val data = mapData(it)
-            emit(Status.Success(data))
-        }
     }
 
-    @Nullable
-    protected abstract suspend fun networkCall(): Response<RequestType>?
+    protected abstract suspend fun networkCall(): Response<RequestType>
 
-    @Nullable
-    protected abstract suspend fun databaseCall(): RequestType?
 
     protected abstract fun mapData(requestType: RequestType): ResultType
 }

@@ -9,9 +9,7 @@ class GetHeroesUseCase(
     private val marvelRepository: MarvelRepository
 ) {
 
-    suspend fun execute(
-        offset: Int
-    ): Flow<Status<List<HeroDomainModel>>> {
-       return marvelRepository.getMarvelCharacters(offset = offset)
+    suspend fun execute(): Flow<Status<List<HeroDomainModel>>> {
+       return marvelRepository.getMarvelCharacters()
     }
 }

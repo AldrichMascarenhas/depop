@@ -3,6 +3,7 @@ package com.nerdcutlet.marvel.presentation.herodetail
 import androidx.lifecycle.viewModelScope
 import com.nerdcutlet.marvel.domain.Status
 import com.nerdcutlet.marvel.domain.gateway.MarvelGateway
+import com.nerdcutlet.marvel.domain.model.HeroDetailDomainModel
 import com.nerdcutlet.marvel.domain.model.HeroDomainModel
 import com.nerdcutlet.marvel.presentation.base.BaseViewModel
 import com.nerdcutlet.marvel.presentation.utils.LoadingState
@@ -18,70 +19,37 @@ class HeroDetailViewModel(
 
     private fun loadData() {
         getHero()
-        getHeroState()
+       // getHeroState()
     }
 
     override fun reducer(action: HeroDetailActions) {
        return when (action) {
-            is HeroDetailActions.SquadAction -> handleAddAndRemove()
-            is HeroDetailActions.LoadSquadHeroState -> getHeroState()
+            is HeroDetailActions.LoadSquadHeroState -> {
+
+            }
             is HeroDetailActions.OnResume -> { loadData() }
         }
     }
 
-    private fun handleAddAndRemove() {
-        viewModelScope.launch {
-            if (state.isLiked) {
-                marvelGateway.removeHeroFromSquad(id = args.heroID).apply {
-                    sendAction(HeroDetailActions.LoadSquadHeroState)
-                }
-            } else {
-                state.hero?.let { hero ->
-                    marvelGateway.addHeroToSquad(hero).apply {
-                        sendAction(HeroDetailActions.LoadSquadHeroState)
-                    }
-                }
-            }
-        }
-    }
 
     private fun getHero() {
         viewModelScope.launch {
-            marvelGateway.getHeroById(args.heroID).collect {
+            marvelGateway.getHeroById(args.id).collect {
                 state = reduce(it)
             }
         }
     }
 
-    private fun getHeroState() {
-        viewModelScope.launch {
-            marvelGateway.getSquadHeroes().collect {
-                state = reduceLike(it)
-            }
-        }
-    }
+//    private fun getHeroState() {
+//        viewModelScope.launch {
+//            marvelGateway.getSquadHeroes().collect {
+//                state = reduceLike(it)
+//            }
+//        }
+//    }
 
-    private fun reduceLike(status: Status<List<HeroDomainModel>>): HeroDetailState {
-        return when (status) {
-            is Status.Success -> {
-                val doesLike = status.data.any {
-                    it.id == args.heroID
-                }
-                state.copy(
-                    isHeroInSquadLoadingState = LoadingState.Ready,
-                    isLiked = doesLike
-                )
-            }
-            is Status.Error -> state.copy(
-                isHeroInSquadLoadingState = LoadingState.Error
-            )
-            is Status.Loading -> state.copy(
-                isHeroInSquadLoadingState = LoadingState.Loading
-            )
-        }
-    }
 
-    private fun reduce(status: Status<HeroDomainModel>): HeroDetailState {
+    private fun reduce(status: Status<HeroDetailDomainModel>): HeroDetailState {
         return when (status) {
             is Status.Success -> {
                 state.copy(

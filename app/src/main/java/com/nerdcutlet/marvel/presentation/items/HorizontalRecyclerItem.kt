@@ -26,6 +26,7 @@ data class HorizontalRecyclerItem(
         }
     }
 
+
     override fun getId(): Long {
         return adapter.itemCount.hashCode().toLong()
     }

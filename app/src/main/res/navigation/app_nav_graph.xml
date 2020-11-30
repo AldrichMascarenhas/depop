@@ -13,6 +13,9 @@
         <action
             android:id="@+id/actionHeroListToHeroDetail"
             app:destination="@id/heroDetailFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/heroDetailFragment"
@@ -20,7 +23,7 @@
         android:label="fragment_hero_detail"
         tools:layout="@layout/fragment_hero_detail" >
         <argument
-            android:name="heroID"
-            app:argType="integer"/>
+            android:name="id"
+            app:argType="string" />
     </fragment>
 </navigation>

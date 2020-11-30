@@ -53,7 +53,7 @@ class HeroDetailFragment : Fragment(), DIAware {
 
     private fun renderReady(state: HeroDetailState) {
         contentSection.update(heroDetailContentRenderer.renderItems(state, this.requireContext()) {
-            viewModel.sendAction(HeroDetailActions.SquadAction)
+
         })
     }
 

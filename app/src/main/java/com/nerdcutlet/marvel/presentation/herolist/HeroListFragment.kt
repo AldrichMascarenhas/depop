@@ -44,7 +44,6 @@ class HeroListFragment : Fragment(), DIAware {
                 customTitle = requireContext().resources.getString(R.string.network_error_message)
             ) {
                 viewModel.sendAction(HeroListActions.LoadHeroes)
-                viewModel.sendAction(HeroListActions.LoadSquad)
             })
         )
     }
@@ -56,23 +55,9 @@ class HeroListFragment : Fragment(), DIAware {
 
     private fun renderReady(state: HeroListState) {
 
-        if (state.squadHeroes.isNotEmpty()) {
-            val item =
-                heroListContentRenderer.renderSquadHeaderItem(
-                    state.squadHeroes,
-                    this.requireContext()
-                ) {
-                    val navDirections =
-                        HeroListFragmentDirections.actionHeroListToHeroDetail(it)
-                    this.findNavController().navigate(navDirections)
-                }
-
-            contentSection.setHeader(item)
-        }
-
         if (state.heroes.isNotEmpty()) {
             contentSection.update(heroListContentRenderer.renderItems(state.heroes) {
-                val navDirections = HeroListFragmentDirections.actionHeroListToHeroDetail(it)
+                val navDirections = HeroListFragmentDirections.actionHeroListToHeroDetail(it.toString())
                 this.findNavController().navigate(navDirections)
             })
         }
@@ -92,8 +77,6 @@ class HeroListFragment : Fragment(), DIAware {
         initRecyclerView()
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
-
-        viewModel.sendAction(HeroListActions.LoadSquad)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

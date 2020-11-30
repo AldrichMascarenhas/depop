@@ -3,6 +3,8 @@ package com.nerdcutlet.marvel.presentation.herodetail
 import android.content.Context
 import com.nerdcutlet.marvel.R
 import com.nerdcutlet.marvel.presentation.items.*
+import com.xwray.groupie.Group
+import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 
@@ -18,33 +20,17 @@ class HeroDetailContentRenderer {
 
         if (state.hero != null) {
 
-            list += HeroBannerItem(
-                url = "${state.hero.heroThumbnailPath}/standard_amazing.${state.hero.heroThumbnailExtension}"
-            )
 
-            list += TextItem(
-                title = state.hero.name,
-                textTitleStyle = TextItem.TextTitleStyle.Headline4
-            ).withMargin(
-                topMargin = context.resources.getDimension(R.dimen.spacing_all_medium).toInt(),
-                leftMargin = context.resources.getDimension(R.dimen.spacing_all_medium).toInt(),
-                rightMargin = context.resources.getDimension(R.dimen.spacing_all_medium).toInt()
-            )
+            val imageList = mutableListOf<Item<GroupieViewHolder>>()
 
-            list += ButtonItem(
-                title = if (state.isLiked) context.resources.getString(R.string.fire_from_squad)
-                else context.resources.getString(
-                    R.string.hire_to_squad
-                ),
-                style = if (state.isLiked) ButtonItem.SquadButtonStyle.FIRE
-                else ButtonItem.SquadButtonStyle.HIRE
-            ) {
-                actionCallback()
-            }.withMargin(
-                topMargin = context.resources.getDimension(R.dimen.spacing_all_medium).toInt(),
-                leftMargin = context.resources.getDimension(R.dimen.spacing_all_medium).toInt(),
-                rightMargin = context.resources.getDimension(R.dimen.spacing_all_medium).toInt()
-            )
+             state.hero.image.forEach {
+                imageList +=  HeroBannerItem(it)
+            }
+
+           list += buildHorizontalRecyclerItem(
+               list = imageList,
+               context = context
+           )
 
             if (state.hero.description.isNotEmpty()) {
                 list += TextItem(
@@ -62,5 +48,16 @@ class HeroDetailContentRenderer {
         }
 
         return list
+    }
+
+    private fun buildHorizontalRecyclerItem(
+        list: List<Group>,
+        context: Context
+    ): HorizontalRecyclerItem {
+        return HorizontalRecyclerItem(
+            title = context.resources.getString(R.string.squad_header_title),
+            adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(list) }
+
+        )
     }
 }

@@ -1,49 +1,57 @@
 package com.nerdcutlet.depop.data
 
-import com.nerdcutlet.depop.data.remote.retrofit.response.CharactersResponse
-import com.nerdcutlet.depop.data.remote.retrofit.response.Data
-import com.nerdcutlet.depop.data.remote.retrofit.response.Result
-import com.nerdcutlet.depop.data.remote.retrofit.response.Thumbnail
+import com.nerdcutlet.depop.data.remote.retrofit.response.*
+import com.nerdcutlet.depop.domain.model.ProductDetailDomainModel
 import com.nerdcutlet.depop.domain.model.ProductDomainModel
 
-object MockData{
+object MockData {
 
-    fun getCharacterResponse() : CharactersResponse {
-        return CharactersResponse(
-            data = Data(
-                count = 0,
-                limit = 0,
-                offset = 0,
-                total = 0,
-                results = listOf(
-                    Result(
-                        id = 1,
-                        description = "",
-                        name = "",
-                        thumbnail = Thumbnail(
-                            "", ""
+    fun getProductResponse(): DepopResponse {
+        return DepopResponse(
+            products = listOf(
+                Product(
+                    id = 1,
+                    picturesData = listOf(
+                        PicturesData(
+                            formats = Formats(
+                                p0 = P0("img-0")
+                            ),
+                            id = 1
                         )
-
-                    )
+                    ),
+                    description = ""
                 )
-            ),
-            etag = "",
-            attributionHTML = "",
-            attributionText = "",
-            code = 10,
-            copyright = "",
-            status = ""
+            )
         )
     }
 
-    fun getHeroDomainModel () = ProductDomainModel(
+    fun getProductDetailResponse(): DepopItemResponse {
+        return DepopItemResponse(
+            id = 1,
+            picturesData = listOf(
+                PicturesData(
+                    formats = Formats(
+                        p0 = P0("img-0")
+                    ),
+                    id = 1
+                )
+            ),
+            description = ""
+        )
+    }
+
+    fun getProductDomainModel() = ProductDomainModel(
         id = 1,
-        name = "",
-        description = "",
-        heroThumbnailExtension = "",
-        heroThumbnailPath = ""
+        image = "img",
+        description = ""
     )
 
-    fun getListHeroDomainModel() = listOf(getHeroDomainModel())
+    fun getProductDetailDomainModel() = ProductDetailDomainModel(
+        id = 1,
+        image = listOf("img-0"),
+        description = ""
+    )
+
+    fun getListProductDomainModel() = listOf(getProductDomainModel())
 
 }

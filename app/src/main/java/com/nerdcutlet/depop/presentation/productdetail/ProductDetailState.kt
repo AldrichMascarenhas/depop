@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herodetail
+package com.nerdcutlet.depop.presentation.productdetail
 
 import com.nerdcutlet.depop.domain.model.ProductDetailDomainModel
 import com.nerdcutlet.depop.presentation.utils.LoadingState

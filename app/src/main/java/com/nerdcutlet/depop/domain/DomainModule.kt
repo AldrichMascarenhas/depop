@@ -22,7 +22,6 @@ val domainModule = DI.Module(name = "domainModule") {
         )
     }
 
-
     bind<DepopGateway>() with singleton {
         DepopGatewayImpl(
             instance(),

@@ -10,5 +10,4 @@ interface DepopRepository {
     suspend fun getProducts(): Flow<Status<List<ProductDomainModel>>>
 
     suspend fun getProductById(id: String): Flow<Status<ProductDetailDomainModel>>
-
 }

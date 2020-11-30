@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herodetail
+package com.nerdcutlet.depop.presentation.productdetail
 
 import android.content.Context
 import com.nerdcutlet.depop.R
@@ -20,11 +20,10 @@ class ProductDetailContentRenderer {
 
         if (state.product != null) {
 
-
             val imageList = mutableListOf<Item<GroupieViewHolder>>()
 
              state.product.image.forEach {
-                imageList +=  ProductBannerItem(it)
+                imageList += ProductBannerItem(it)
             }
 
            list += buildHorizontalRecyclerItem(

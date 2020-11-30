@@ -24,11 +24,9 @@ abstract class FlowStatus<RequestType : Any, ResultType : Any> {
         } catch (exception: NetworkException) {
             emit(Status.Error(Exception()))
         }
-
     }
 
     protected abstract suspend fun networkCall(): Response<RequestType>
-
 
     protected abstract fun mapData(requestType: RequestType): ResultType
 }

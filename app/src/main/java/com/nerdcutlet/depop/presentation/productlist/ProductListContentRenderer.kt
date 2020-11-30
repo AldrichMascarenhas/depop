@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herolist
+package com.nerdcutlet.depop.presentation.productlist
 
 import com.nerdcutlet.depop.domain.model.ProductDomainModel
 import com.nerdcutlet.depop.presentation.items.ProductItem

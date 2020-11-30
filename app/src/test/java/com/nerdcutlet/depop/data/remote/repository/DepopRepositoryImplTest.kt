@@ -1,7 +1,6 @@
 package com.nerdcutlet.depop.data.remote.repository
 
 import com.nerdcutlet.depop.data.MockData
-import com.nerdcutlet.depop.data.local.dao.MarvelDao
 import com.nerdcutlet.depop.data.remote.retrofit.service.DepopService
 import com.nerdcutlet.depop.domain.Status
 import com.nerdcutlet.depop.domain.repository.DepopRepository
@@ -29,8 +28,7 @@ internal class DepopRepositoryImplTest {
     @MockK
     internal lateinit var depopService: DepopService
 
-    @MockK
-    internal lateinit var marvelDao: MarvelDao
+
 
     lateinit var depopRepository: DepopRepository
 
@@ -41,7 +39,7 @@ internal class DepopRepositoryImplTest {
     fun setUp() {
         MockKAnnotations.init(this)
         depopRepository = DepopRepositoryImpl(
-            depopService, marvelDao
+            depopService
         )
     }
 
@@ -52,19 +50,16 @@ internal class DepopRepositoryImplTest {
 
             // Given
             coEvery {
-                depopService.getCharacters(
-                    offset = 0,
-                    orderBy = "name"
-                )
-            } returns Response.success(MockData.getCharacterResponse())
+                depopService.getProducts()
+            } returns Response.success(MockData.getProductResponse())
 
             // When
-            val flow = depopRepository.getProducts(offset = 0)
+            val flow = depopRepository.getProducts()
 
             // Then
             flow.collect {
                 if (it is Status.Success) it shouldBeEqualTo Status.Success(
-                   MockData.getListHeroDomainModel()
+                   MockData.getListProductDomainModel()
                 )
                 if (it is Status.Loading) it shouldBeEqualTo Status.Loading
             }
@@ -79,19 +74,19 @@ internal class DepopRepositoryImplTest {
 
             // Given
             coEvery {
-                depopService.getCharacterById(
-                    characterId = 0
+                depopService.getProductsById(
+                    id = "1"
                 )
-            } returns Response.success(MockData.getCharacterResponse())
+            } returns Response.success(MockData.getProductDetailResponse())
 
             // When
-            val flow = depopRepository.getProductById(id = 0)
+            val flow = depopRepository.getProductById(id = "1")
 
             // Then
             flow.collect {
 
                 if (it is Status.Success) it shouldBeEqualTo Status.Success(
-                    MockData.getHeroDomainModel()
+                    MockData.getProductDomainModel()
                 )
                 if (it is Status.Loading) it shouldBeEqualTo Status.Loading
             }

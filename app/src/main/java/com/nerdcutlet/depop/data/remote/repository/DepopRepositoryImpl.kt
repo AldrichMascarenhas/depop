@@ -1,6 +1,5 @@
 package com.nerdcutlet.depop.data.remote.repository
 
-
 import com.nerdcutlet.depop.data.remote.retrofit.response.DepopItemResponse
 import com.nerdcutlet.depop.data.remote.retrofit.response.DepopResponse
 import com.nerdcutlet.depop.data.remote.retrofit.service.DepopService
@@ -21,19 +20,18 @@ class DepopRepositoryImpl(
         return object : FlowStatus<DepopResponse, List<ProductDomainModel>>() {
 
             override suspend fun networkCall(): Response<DepopResponse> {
-                return depopService.getCharacters()
+                return depopService.getProducts()
             }
 
             override fun mapData(requestType: DepopResponse): List<ProductDomainModel> {
-                return requestType.objects
+                return requestType.products
                     .map {
                         ProductDomainModel(
                             it.id,
                             it.description,
-                            it.picturesData.first().formats.p1.url
+                            it.picturesData.first().formats.p0.url
                         )
                     }
-
             }
         }.asFlow
     }
@@ -43,11 +41,10 @@ class DepopRepositoryImpl(
         return object : FlowStatus<DepopItemResponse, ProductDetailDomainModel>() {
 
             override suspend fun networkCall(): Response<DepopItemResponse> {
-                return depopService.getCharacterById(id)
+                return depopService.getProductsById(id)
             }
 
             override fun mapData(requestType: DepopItemResponse): ProductDetailDomainModel {
-
 
                 val images = requestType.picturesData.map {
                     it.formats.p0.url
@@ -59,7 +56,5 @@ class DepopRepositoryImpl(
                 )
             }
         }.asFlow
-
-
     }
 }

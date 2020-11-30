@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herodetail
+package com.nerdcutlet.depop.presentation.productdetail
 
 sealed class ProductDetailActions {
     object OnResume : ProductDetailActions()

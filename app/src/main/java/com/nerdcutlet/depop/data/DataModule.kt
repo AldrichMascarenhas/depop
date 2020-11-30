@@ -28,7 +28,6 @@ val dataModule = DI.Module(name = "dataModule") {
         NetworkCheckerImpl(instance())
     }
 
-
     bind() from singleton { NetworkStateInterceptor(instance()) }
 
     bind<Retrofit.Builder>() with singleton { Retrofit.Builder() }
@@ -60,5 +59,4 @@ val dataModule = DI.Module(name = "dataModule") {
             instance()
         )
     }
-
 }

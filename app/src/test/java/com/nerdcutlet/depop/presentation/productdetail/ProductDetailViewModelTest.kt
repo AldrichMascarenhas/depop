@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herodetail
+package com.nerdcutlet.depop.presentation.productdetail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nerdcutlet.depop.data.MockData
@@ -36,7 +36,7 @@ class ProductDetailViewModelTest {
     internal lateinit var depopGateway: DepopGateway
 
     @MockK
-    internal lateinit var heroDetailFragmentArgs: HeroDetailFragmentArgs
+    internal lateinit var productDetailFragmentArgs: ProductDetailFragmentArgs
 
     private lateinit var productDetailViewModel: ProductDetailViewModel
 
@@ -45,8 +45,8 @@ class ProductDetailViewModelTest {
         MockKAnnotations.init(this)
 
         productDetailViewModel = ProductDetailViewModel(
-            marvelGateway = depopGateway,
-            args = heroDetailFragmentArgs
+            depopGateway = depopGateway,
+            args = productDetailFragmentArgs
         )
     }
 
@@ -56,52 +56,32 @@ class ProductDetailViewModelTest {
         coroutineScope.runBlockingTest {
 
             //Given an expected flow
-            val getHeroFlow = flow {
+            val getProductDetailFlow = flow {
                 emit(Status.Loading)
                 delay(10)
                 emit(
-                    Status.Success(MockData.getHeroDomainModel())
+                    Status.Success(MockData.getProductDetailDomainModel())
                 )
             }
 
-            val getSquadFlow = flow {
-                emit(Status.Loading)
-                delay(5)
-                emit(
-                    Status.Success(MockData.getListHeroDomainModel())
-                )
-            }
 
             // Mock Gateway
-            every { heroDetailFragmentArgs.heroID } returns 1
-            coEvery { depopGateway.getSquadHeroes() } returns getSquadFlow
-            coEvery { depopGateway.getProductById(any()) } returns getHeroFlow
+            every { productDetailFragmentArgs.id } returns "1"
+            coEvery { depopGateway.getProductById(any()) } returns getProductDetailFlow
 
             // When
             productDetailViewModel.sendAction(ProductDetailActions.OnResume)
 
             // Then
             productDetailViewModel.stateLiveData.value shouldBeEqualTo ProductDetailState(
-                loadingProductState = LoadingState.Loading,
-                isHeroInSquadLoadingState = LoadingState.Loading
-            )
-
-            coroutineScope.advanceTimeBy(5)
-
-            // Then
-            productDetailViewModel.stateLiveData.value shouldBeEqualTo ProductDetailState(
-                isLiked = true,
-                loadingProductState = LoadingState.Loading,
-                isHeroInSquadLoadingState = LoadingState.Ready
+                loadingProductState = LoadingState.Loading
             )
 
             coroutineScope.advanceTimeBy(10)
 
             productDetailViewModel.stateLiveData.value shouldBeEqualTo ProductDetailState(
-                isLiked = true,
-                product = MockData.getHeroDomainModel(),
-                loadingProductState = LoadingState.Ready,
-                isHeroInSquadLoadingState = LoadingState.Ready
+                product = MockData.getProductDetailDomainModel(),
+                loadingProductState = LoadingState.Ready
             )
 
         }

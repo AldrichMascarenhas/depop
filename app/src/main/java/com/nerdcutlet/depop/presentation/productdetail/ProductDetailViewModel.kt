@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herodetail
+package com.nerdcutlet.depop.presentation.productdetail
 
 import androidx.lifecycle.viewModelScope
 import com.nerdcutlet.depop.domain.Status
@@ -23,12 +23,10 @@ class ProductDetailViewModel(
     override fun reducer(action: ProductDetailActions) {
        return when (action) {
             is ProductDetailActions.LoadSquadProductState -> {
-
             }
             is ProductDetailActions.OnResume -> { loadData() }
         }
     }
-
 
     private fun getProduct() {
         viewModelScope.launch {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/heroListFragment"
-        android:name="com.nerdcutlet.depop.presentation.herolist.ProductListFragment"
+        android:name="com.nerdcutlet.depop.presentation.productlist.ProductListFragment"
         android:label="fragment_hero_list"
         tools:layout="@layout/fragment_product_list" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/heroDetailFragment"
-        android:name="com.nerdcutlet.depop.presentation.herodetail.ProductDetailFragment"
+        android:name="com.nerdcutlet.depop.presentation.productdetail.ProductDetailFragment"
         android:label="fragment_hero_detail"
         tools:layout="@layout/fragment_product_detail" >
         <argument

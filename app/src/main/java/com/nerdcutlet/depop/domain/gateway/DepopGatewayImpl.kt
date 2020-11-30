@@ -18,5 +18,4 @@ class DepopGatewayImpl(
     override suspend fun getProductById(id: String): Flow<Status<ProductDetailDomainModel>> {
         return getProductByIdUseCase.execute(id)
     }
-
 }

@@ -9,11 +9,10 @@ import retrofit2.http.Path
 interface DepopService {
 
     @GET("products/popular/")
-    suspend fun getCharacters(): Response<DepopResponse>
+    suspend fun getProducts(): Response<DepopResponse>
 
-    @GET("products/{characterId}/")
-    suspend fun getCharacterById(
-        @Path("characterId") characterId: String
+    @GET("products/{id}/")
+    suspend fun getProductsById(
+        @Path("id") id: String
     ): Response<DepopItemResponse>
-
 }

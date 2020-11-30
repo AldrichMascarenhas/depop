@@ -1,4 +1,4 @@
-package com.nerdcutlet.depop.presentation.herolist
+package com.nerdcutlet.depop.presentation.productlist
 
 import androidx.lifecycle.viewModelScope
 import com.nerdcutlet.depop.domain.Status
@@ -21,7 +21,6 @@ class ProductListViewModel(
         }
     }
 
-
     private fun getHeroes() {
         viewModelScope.launch {
             depopGateway.getProducts().collect {
@@ -30,22 +29,20 @@ class ProductListViewModel(
         }
     }
 
-
     private fun reduceHeroes(status: Status<List<ProductDomainModel>>): ProductListState {
         return when (status) {
             is Status.Success -> {
                 state.copy(
-                    loadingHeroes = LoadingState.Ready,
+                    loadingProducts = LoadingState.Ready,
                     products = status.data
                 )
             }
             is Status.Error -> state.copy(
-                loadingHeroes = LoadingState.Error
+                loadingProducts = LoadingState.Error
             )
             is Status.Loading -> state.copy(
-                loadingHeroes =LoadingState.Loading
+                loadingProducts = LoadingState.Loading
             )
         }
     }
-
 }

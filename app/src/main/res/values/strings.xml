@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">Superhero Squad Maker</string>
+    <string name="app_name">Depop</string>
 
     <string name="squad_header_title">My Squad</string>
-
-    <string name="hire_to_squad">💪 Add to squad</string>
-    <string name="fire_from_squad">🔥 Fire from Squad</string>
     <string name="try_again">Try again</string>
     <string name="network_error_message">There was an error</string>
 

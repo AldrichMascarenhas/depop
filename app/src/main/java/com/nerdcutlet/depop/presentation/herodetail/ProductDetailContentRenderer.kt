@@ -8,10 +8,10 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 
-class HeroDetailContentRenderer {
+class ProductDetailContentRenderer {
 
     fun renderItems(
-        state: HeroDetailState,
+        state: ProductDetailState,
         context: Context,
         actionCallback: (() -> Unit)
     ): List<Item<GroupieViewHolder>> {

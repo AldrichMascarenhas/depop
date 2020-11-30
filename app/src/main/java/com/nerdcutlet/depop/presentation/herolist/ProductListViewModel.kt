@@ -9,15 +9,15 @@ import com.nerdcutlet.depop.presentation.utils.LoadingState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HeroListViewModel(
+class ProductListViewModel(
     private val depopGateway: DepopGateway
-) : BaseViewModel<HeroListState, HeroListActions>(
-    HeroListState()
+) : BaseViewModel<ProductListState, ProductListActions>(
+    ProductListState()
 ) {
 
-    override fun reducer(action: HeroListActions) {
+    override fun reducer(action: ProductListActions) {
         return when (action) {
-            HeroListActions.LoadHeroes -> getHeroes()
+            ProductListActions.LoadProducts -> getHeroes()
         }
     }
 
@@ -31,7 +31,7 @@ class HeroListViewModel(
     }
 
 
-    private fun reduceHeroes(status: Status<List<ProductDomainModel>>): HeroListState {
+    private fun reduceHeroes(status: Status<List<ProductDomainModel>>): ProductListState {
         return when (status) {
             is Status.Success -> {
                 state.copy(

@@ -9,29 +9,28 @@ import com.nerdcutlet.depop.presentation.utils.LoadingState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HeroDetailViewModel(
+class ProductDetailViewModel(
     private val depopGateway: DepopGateway,
-    private val args: HeroDetailFragmentArgs
-) : BaseViewModel<HeroDetailState, HeroDetailActions>(
-    HeroDetailState()
+    private val args: ProductDetailFragmentArgs
+) : BaseViewModel<ProductDetailState, ProductDetailActions>(
+    ProductDetailState()
 ) {
 
     private fun loadData() {
-        getHero()
-       // getHeroState()
+        getProduct()
     }
 
-    override fun reducer(action: HeroDetailActions) {
+    override fun reducer(action: ProductDetailActions) {
        return when (action) {
-            is HeroDetailActions.LoadSquadHeroState -> {
+            is ProductDetailActions.LoadSquadProductState -> {
 
             }
-            is HeroDetailActions.OnResume -> { loadData() }
+            is ProductDetailActions.OnResume -> { loadData() }
         }
     }
 
 
-    private fun getHero() {
+    private fun getProduct() {
         viewModelScope.launch {
             depopGateway.getProductById(args.id).collect {
                 state = reduce(it)
@@ -39,28 +38,19 @@ class HeroDetailViewModel(
         }
     }
 
-//    private fun getHeroState() {
-//        viewModelScope.launch {
-//            marvelGateway.getSquadHeroes().collect {
-//                state = reduceLike(it)
-//            }
-//        }
-//    }
-
-
-    private fun reduce(status: Status<ProductDetailDomainModel>): HeroDetailState {
+    private fun reduce(status: Status<ProductDetailDomainModel>): ProductDetailState {
         return when (status) {
             is Status.Success -> {
                 state.copy(
-                    loadingHeroState = LoadingState.Ready,
+                    loadingProductState = LoadingState.Ready,
                     product = status.data
                 )
             }
             is Status.Error -> state.copy(
-                loadingHeroState = LoadingState.Error
+                loadingProductState = LoadingState.Error
             )
             is Status.Loading -> state.copy(
-                loadingHeroState = LoadingState.Loading
+                loadingProductState = LoadingState.Loading
             )
         }
     }

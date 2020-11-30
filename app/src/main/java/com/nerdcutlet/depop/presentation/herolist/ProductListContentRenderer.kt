@@ -5,7 +5,7 @@ import com.nerdcutlet.depop.presentation.items.ProductItem
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 
-class HeroListContentRenderer {
+class ProductListContentRenderer {
 
     fun renderItems(
         list: List<ProductDomainModel>,
@@ -24,7 +24,7 @@ class HeroListContentRenderer {
         actionCallback: ((Int) -> Unit)
     ): ProductItem {
         return ProductItem(
-            heroId = productDomainModel.id,
+            productId = productDomainModel.id,
             name = productDomainModel.description,
             url = productDomainModel.image,
             actionCallback = {

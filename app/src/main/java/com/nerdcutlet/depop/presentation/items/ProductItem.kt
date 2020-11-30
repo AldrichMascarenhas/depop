@@ -8,7 +8,7 @@ import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.item_product.view.*
 
 data class ProductItem(
-    val heroId: Int,
+    val productId: Int,
     val name: String,
     val url: String,
     val actionCallback: ((Int) -> Unit)
@@ -23,7 +23,7 @@ data class ProductItem(
             item_hero_textview.text = name
 
             setOnClickListener {
-                actionCallback(heroId)
+                actionCallback(productId)
             }
 
             Glide.with(item_hero_imageview.context)
@@ -33,5 +33,5 @@ data class ProductItem(
         }
     }
 
-    override fun getId() = heroId.toLong()
+    override fun getId() = productId.toLong()
 }

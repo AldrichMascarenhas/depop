@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/heroListFragment"
-        android:name="com.nerdcutlet.depop.presentation.herolist.HeroListFragment"
+        android:name="com.nerdcutlet.depop.presentation.herolist.ProductListFragment"
         android:label="fragment_hero_list"
-        tools:layout="@layout/fragment_hero_list" >
+        tools:layout="@layout/fragment_product_list" >
         <action
             android:id="@+id/actionHeroListToHeroDetail"
             app:destination="@id/heroDetailFragment" />
@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/heroDetailFragment"
-        android:name="com.nerdcutlet.depop.presentation.herodetail.HeroDetailFragment"
+        android:name="com.nerdcutlet.depop.presentation.herodetail.ProductDetailFragment"
         android:label="fragment_hero_detail"
-        tools:layout="@layout/fragment_hero_detail" >
+        tools:layout="@layout/fragment_product_detail" >
         <argument
             android:name="id"
             app:argType="string" />

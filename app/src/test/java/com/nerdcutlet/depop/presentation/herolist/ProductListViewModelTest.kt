@@ -22,7 +22,7 @@ import org.junit.runners.JUnit4
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
-class HeroListViewModelTest {
+class ProductListViewModelTest {
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -34,14 +34,14 @@ class HeroListViewModelTest {
     internal lateinit var depopGateway: DepopGateway
 
 
-    private lateinit var heroListViewModel: HeroListViewModel
+    private lateinit var productListViewModel: ProductListViewModel
 
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
 
-        heroListViewModel = HeroListViewModel(
+        productListViewModel = ProductListViewModel(
             marvelGateway = depopGateway
         )
 
@@ -65,10 +65,10 @@ class HeroListViewModelTest {
             coEvery { depopGateway.getProducts(any()) } returns flow
 
             // When
-            heroListViewModel.sendAction(HeroListActions.LoadHeroes)
+            productListViewModel.sendAction(ProductListActions.LoadProducts)
 
             // Then
-            heroListViewModel.stateLiveData.value shouldBeEqualTo HeroListState(
+            productListViewModel.stateLiveData.value shouldBeEqualTo ProductListState(
                 offset = 0,
                 loadingHeroes = LoadingState.Loading
             )
@@ -76,7 +76,7 @@ class HeroListViewModelTest {
             coroutineScope.advanceTimeBy(10)
 
             // Then
-            heroListViewModel.stateLiveData.value shouldBeEqualTo HeroListState(
+            productListViewModel.stateLiveData.value shouldBeEqualTo ProductListState(
                 offset = 20,
                 loadingHeroes = LoadingState.Ready,
                 products = MockData.getListHeroDomainModel()
@@ -102,10 +102,10 @@ class HeroListViewModelTest {
             coEvery { depopGateway.getSquadHeroes() } returns flow
 
             // When
-            heroListViewModel.sendAction(HeroListActions.LoadSquad)
+            productListViewModel.sendAction(ProductListActions.LoadSquad)
 
             // Then
-            heroListViewModel.stateLiveData.value shouldBeEqualTo HeroListState(
+            productListViewModel.stateLiveData.value shouldBeEqualTo ProductListState(
                 offset = 0,
                 squadHeroesLoadingState = LoadingState.Loading
             )
@@ -113,7 +113,7 @@ class HeroListViewModelTest {
             coroutineScope.advanceTimeBy(10)
 
             // Then
-            heroListViewModel.stateLiveData.value shouldBeEqualTo HeroListState(
+            productListViewModel.stateLiveData.value shouldBeEqualTo ProductListState(
                 squadHeroesLoadingState = LoadingState.Ready,
                 squadHeroes = MockData.getListHeroDomainModel()
             )

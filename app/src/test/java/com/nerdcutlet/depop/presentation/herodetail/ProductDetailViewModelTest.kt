@@ -24,7 +24,7 @@ import org.junit.runners.JUnit4
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
-class HeroDetailViewModelTest {
+class ProductDetailViewModelTest {
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -38,13 +38,13 @@ class HeroDetailViewModelTest {
     @MockK
     internal lateinit var heroDetailFragmentArgs: HeroDetailFragmentArgs
 
-    private lateinit var heroDetailViewModel: HeroDetailViewModel
+    private lateinit var productDetailViewModel: ProductDetailViewModel
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
 
-        heroDetailViewModel = HeroDetailViewModel(
+        productDetailViewModel = ProductDetailViewModel(
             marvelGateway = depopGateway,
             args = heroDetailFragmentArgs
         )
@@ -78,29 +78,29 @@ class HeroDetailViewModelTest {
             coEvery { depopGateway.getProductById(any()) } returns getHeroFlow
 
             // When
-            heroDetailViewModel.sendAction(HeroDetailActions.OnResume)
+            productDetailViewModel.sendAction(ProductDetailActions.OnResume)
 
             // Then
-            heroDetailViewModel.stateLiveData.value shouldBeEqualTo HeroDetailState(
-                loadingHeroState = LoadingState.Loading,
+            productDetailViewModel.stateLiveData.value shouldBeEqualTo ProductDetailState(
+                loadingProductState = LoadingState.Loading,
                 isHeroInSquadLoadingState = LoadingState.Loading
             )
 
             coroutineScope.advanceTimeBy(5)
 
             // Then
-            heroDetailViewModel.stateLiveData.value shouldBeEqualTo HeroDetailState(
+            productDetailViewModel.stateLiveData.value shouldBeEqualTo ProductDetailState(
                 isLiked = true,
-                loadingHeroState = LoadingState.Loading,
+                loadingProductState = LoadingState.Loading,
                 isHeroInSquadLoadingState = LoadingState.Ready
             )
 
             coroutineScope.advanceTimeBy(10)
 
-            heroDetailViewModel.stateLiveData.value shouldBeEqualTo HeroDetailState(
+            productDetailViewModel.stateLiveData.value shouldBeEqualTo ProductDetailState(
                 isLiked = true,
                 product = MockData.getHeroDomainModel(),
-                loadingHeroState = LoadingState.Ready,
+                loadingProductState = LoadingState.Ready,
                 isHeroInSquadLoadingState = LoadingState.Ready
             )
 

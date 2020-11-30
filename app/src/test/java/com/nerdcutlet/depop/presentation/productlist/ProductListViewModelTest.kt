@@ -48,7 +48,7 @@ class ProductListViewModelTest {
     }
 
     @Test
-    fun `verify state when Load Hero is called`() {
+    fun `verify state when Load Product is called`() {
 
         coroutineScope.runBlockingTest {
 

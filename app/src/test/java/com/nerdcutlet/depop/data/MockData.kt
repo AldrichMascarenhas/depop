@@ -42,7 +42,7 @@ object MockData {
 
     fun getProductDomainModel() = ProductDomainModel(
         id = 1,
-        image = "img",
+        image = "img-0",
         description = ""
     )
 

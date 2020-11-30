@@ -44,7 +44,7 @@ internal class DepopRepositoryImplTest {
     }
 
     @Test
-    fun `verify get marvel characters`() {
+    fun `verify get product list`() {
 
         coroutinesTestRule.runBlockingTest {
 
@@ -68,7 +68,7 @@ internal class DepopRepositoryImplTest {
     }
 
     @Test
-    fun `verify get marvel character by ID`() {
+    fun `verify get product by ID`() {
 
         coroutinesTestRule.runBlockingTest {
 
@@ -86,7 +86,7 @@ internal class DepopRepositoryImplTest {
             flow.collect {
 
                 if (it is Status.Success) it shouldBeEqualTo Status.Success(
-                    MockData.getProductDomainModel()
+                    MockData.getProductDetailDomainModel()
                 )
                 if (it is Status.Loading) it shouldBeEqualTo Status.Loading
             }

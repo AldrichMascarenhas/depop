@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.nerdcutlet.marvel"
+        applicationId "com.nerdcutlet.depop"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

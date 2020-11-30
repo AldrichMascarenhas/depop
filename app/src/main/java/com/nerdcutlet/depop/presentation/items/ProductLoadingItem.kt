@@ -14,7 +14,7 @@ object ProductLoadingItem : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
 
-            lottie_loading.setAnimation("lottie_animations/hero_loading.json")
+            lottie_loading.setAnimation("lottie_animations/loading.json")
 
             if (!lottie_loading.isAnimating) {
                 lottie_loading.playAnimation()
